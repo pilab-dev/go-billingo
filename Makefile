@@ -17,7 +17,7 @@ gen:
 
 authors:
 	@echo "--> Updating the AUTHORS"
-	git log --format='%aN <%aE>' | sort -u > AUTHORS
+	@git log --format='%aN <%aE>' | sort -u > AUTHORS
 
 changelog:
 	git log $(shell git tag | tail -n1)..HEAD --no-merges --format=%B > changelog
