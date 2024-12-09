@@ -8,7 +8,7 @@ Generated from billingo's OpenAPI spec.
 
 ### Installation
 
-`go get -u github.com/pilab-dev/billingo/v3`
+`go get -u github.com/pilab-dev/go-billingo/v3`
 
 ### Create Product:
 
@@ -21,7 +21,7 @@ import (
 	"os"
 	"time"
 
-	"github.cm/pilab-dev/go-billingo/v3"
+	"github.com/pilab-dev/go-billingo/v3"
 )
 
 func main() {
