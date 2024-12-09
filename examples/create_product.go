@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.cm/pilab-dev/go-billingo/v3"
+	"github.com/pilab-dev/go-billingo/v3"
 )
 
 func main() {

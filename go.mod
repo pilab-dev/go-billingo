@@ -1,4 +1,4 @@
-module github.cm/pilab-dev/go-billingo/v3
+module github.com/pilab-dev/go-billingo/v3
 
 go 1.23.3
 

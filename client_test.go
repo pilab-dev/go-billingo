@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.cm/pilab-dev/go-billingo/v3"
 	"github.com/oapi-codegen/runtime/types"
+	"github.com/pilab-dev/go-billingo/v3"
 	"github.com/stretchr/testify/require"
 )
 
@@ -73,6 +73,24 @@ func TestCreateInvoice(t *testing.T) {
 	})
 
 	t.Run("CreateInvoice", func(t *testing.T) {
+		var blockID int = 0
+
+		t.Run("TestGetBlock", func(t *testing.T) {
+			res, err := c.ListDocumentBlockWithResponse(ctx, &billingo.ListDocumentBlockParams{})
+
+			require.NoError(t, err)
+			require.Equal(t, 200, res.StatusCode())
+			require.NotNil(t, res.JSON200.Data)
+			require.NotEmpty(t, res.JSON200.Data)
+
+			docs := *res.JSON200.Data
+
+			require.NotNil(t, docs[0].Id)
+
+			t.Logf("Block ID: %d", *docs[0].Id)
+			blockID = *docs[0].Id
+		})
+
 		var testItem billingo.DocumentInsert_Items_Item
 
 		testItem.FromDocumentProductData(billingo.DocumentProductData{
@@ -93,7 +111,7 @@ func TestCreateInvoice(t *testing.T) {
 		inv, err := c.CreateDocumentWithResponse(ctx, billingo.DocumentInsert{
 			// AdvanceInvoice: &[]int{},
 			// BankAccountId:  billingo.ToPtr(0),
-			BlockId:        0,
+			BlockId:        blockID,
 			Comment:        new(string),
 			ConversionRate: billingo.ToPtr(float32(1.0)),
 			Currency:       "HUF",
